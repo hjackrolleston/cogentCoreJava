@@ -2,16 +2,12 @@ package com.cogent.employeemanagementsystem.model;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 
-@Data
-@AllArgsConstructor
-public class Employee {
+//@Data
+//@AllArgsConstructor
+public /*final*/ class Employee {
 	private String employeeId, firstName, lastName, address;
 	// private String departmentId;
 	private float empSalary;
-	
-	public Employee() {
-		this.employeeId=""; //explicit default constructor
-	}
 	
 	public Employee(String employeeId, String firstName, String lastName, float empSalary) {
 		super();
@@ -20,9 +16,23 @@ public class Employee {
 		this.lastName = lastName;
 		this.empSalary = empSalary;
 	}
+
+	public Employee() {
+		this.employeeId=""; //explicit default constructor
+		System.out.println("Hello from Employee default constructor.");
+	}
 	
+	public void printDetails() {
+		System.out.println(firstName+", "+lastName+", "+employeeId+", "
+				+empSalary);
+		if (address!=null) {System.out.print(", "+address);}
+	}
 	
-	/* public String getEmployeeId() {
+	public float calculateSalary() {
+		return empSalary + 500; //the 500 is an added bonus
+	}
+	
+	public String getEmployeeId() {
 		return employeeId;
 	}
 	public void setEmployeeId(String employeeId) {
@@ -51,6 +61,6 @@ public class Employee {
 	}
 	public void setEmpSalary(float empSalary) {
 		this.empSalary = empSalary;
-	}*/
+	}
 
 }

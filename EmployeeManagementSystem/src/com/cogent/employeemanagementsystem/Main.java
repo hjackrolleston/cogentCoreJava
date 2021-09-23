@@ -1,36 +1,56 @@
 package com.cogent.employeemanagementsystem;
 import com.cogent.employeemanagementsystem.model.Employee;
-import com.cogent.employeemanagementsystem.service.EmployeeService;
+import java.util.Scanner;
+import com.cogent.employeemanagementsystem.service.EmployeeServiceImpl;
 public class Main {
 
 	public static void main(String[] args) {
-		EmployeeService employeeService = new EmployeeService();
-		Employee employee = new Employee("ab001","abhi","chivate","PA",123.0f);
 		
-		String result = employeeService.addEmployee(employee);
-		System.out.println(result);
+		// switch case to handle all options:
+		/*
+		 * 1) add
+		 * 2) get emp by id
+		 * 3) delete
+		 * 4) update
+		 * 5) getall
+		 * 6) exits
+		 * */
 		
-		//Employee employee=new Employee();
-		// ClassName reference = object
-		/*Employee employee2 = new Employee
-				("ab001", "abhi", "chivate", "PA", 100.0f);
-		Employee employee3 = null;*/
-		//int a;
-		//System.out.println(a);
+		EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
+		Employee emp1=new Employee("ab001","Abhi","Chivate",123.00f);
+		Employee emp2=new Employee("ja454","Jason","Richards",123.00f);
+		Employee emp3=new Employee("re994","Reggie","Knox",122.00f);
+		Employee emp4=new Employee("ja522","Janice","Bronson",112.00f);
+		Employee emp5=new Employee("am933","Amber","Reina",126.00f);
+		Employee emp6=new Employee("ca989","Carl","Norris",103.00f);
+		Employee emp7=new Employee("ch943","Charles","Garrison",103.00f);
 		
-		//System.out.println(employee2.getEmployeeId());
-		/* System.out.println(employee2.getFirstName());
-		System.out.println(employee2.getLastName());
-		System.out.println(employee2.getAddress());
-		System.out.println(employee2.getEmpSalary()); */
+		String result = employeeService.addEmployee(emp1);
+		String re2 = employeeService.addEmployee(emp2);
+		String re3 = employeeService.addEmployee(emp3);
+		String re4 = employeeService.addEmployee(emp4);
+		String re5 = employeeService.addEmployee(emp5);
+		String re6 = employeeService.addEmployee(emp6);
+		//System.out.println(result);
 		
-		//System.out.println(employee3.getEmployeeId());
+		Employee[] employees = employeeService.getEmployees(); employeeService.showNameList();
+		System.out.println("===================\n\n");
 		
-		/* Employee employees[] = new Employee[10];
-		for (int i = 0; i<employees.length; i++) {
-			employees[i] = new Employee();
-		}
-		for (Employee employee4:employees) {System.out.println(employee4);}*/
+		System.out.println(employeeService.deleteEmployeeById("am933"));
+		
+		employeeService.showNameList();
+		
+		
+		// Updating the record for an employee who got a raise
+		employeeService.getEmployees()[3].printDetails();
+		emp4 = new Employee("ja522","Janice","Bronson",150.00f);
+		employeeService.updateEmployees("ja522",emp4);
+		employeeService.getEmployees()[3].printDetails();
+		
+		Scanner sc = new Scanner(System.in);System.out.println("Enter an employee's first name...");
+		String fN = sc.next();System.out.println("Last name...");String lN=sc.next();
+		Employee searched=employeeService.getEmployeeByName(fN,lN);
+		if(searched!=null) {searched.printDetails();}
 	}
 
 }
