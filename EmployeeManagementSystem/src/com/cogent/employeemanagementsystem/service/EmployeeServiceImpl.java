@@ -1,5 +1,4 @@
 package com.cogent.employeemanagementsystem.service;
-
 import com.cogent.employeemanagementsystem.model.Employee;
 import com.cogent.employeemanagementsystem.repository.EmployeeRepository;
 import com.cogent.employeemanagementsystem.repository.EmployeeRepositoryImpl;
@@ -18,7 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 	}
 	
-	private Employee employees[] = new Employee[10];
+	// private Employee employees[] = new Employee[10];
 	
 	static int counter=0;
 	@Override

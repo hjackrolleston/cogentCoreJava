@@ -8,5 +8,6 @@ public interface EmployeeRepository {
 	public Employee getEmployeeById(String id);
 	public Employee getEmployeeByName(String fName,String lName);
 	public Employee[] getEmployees();
+	public Employee[] getEmployeesByName(String name);
 	public String updateEmployees(String id, Employee employee);
 }

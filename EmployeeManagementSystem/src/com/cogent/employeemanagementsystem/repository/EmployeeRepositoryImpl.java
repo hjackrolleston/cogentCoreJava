@@ -9,7 +9,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 	private EmployeeRepositoryImpl() {}
 
-	public static EmployeeRepositoryImpl getInstance() {
+	public static EmployeeRepository/*Impl*/ getInstance() {
 		if (employeeRepository == null) {
 			employeeRepository = new EmployeeRepositoryImpl();
 			return employeeRepository;
@@ -101,7 +101,19 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		}System.out.println("Employee with this name does not exist.");
 		return null;
 	}
-
+	
+	/** Method added: 2021 Sept 23 Thurs (Day 4)
+	 * */
+	private static int index=0;
+	public Employee[] getEmployeesByName(String name) {
+		Employee[] employeesTemp=new Employee[employees.length];
+		for (Employee employee : employees) {
+			if (employee.getFirstName().equals(name)) {
+				employeesTemp [index++] = employee;
+			}
+		} return employeesTemp;
+	}
+	
 	private int getIndex(Employee employee) {
 		for (int i = 0; i < employees.length; i++) {
 			if (employees[i].equals(employee)) {
