@@ -54,6 +54,15 @@ public class ProductRepositoryImpl implements ProductRepository {
 		} return null;
 	}
 	
+	@Override
+	public Product getProductByName(String name) {
+		for (Product product : products) {
+			if (product != null && name.equals(product.getProductName())) {
+				return product;
+			}
+		} return null;
+	}
+	
 	// Done.
 	@Override
 	public Product[] getProducts() {

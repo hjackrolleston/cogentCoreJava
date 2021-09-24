@@ -13,6 +13,10 @@ public class ProductServiceImpl implements ProductService {
 		//return null;
 	}
 	
+	public Product getProductByName(String name) {
+		return productRepository.getProductByName(name);
+	}
+	
 	public void showNameList() {
 		for (Product product2:productRepository.getProducts()) {
 			if (product2!=null) {

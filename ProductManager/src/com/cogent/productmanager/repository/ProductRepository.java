@@ -8,4 +8,5 @@ public interface ProductRepository {
 	public Product[] getProducts();
 	public String deleteProductById(String id);
 	public void deleteAllProducts();
+	public Product getProductByName(String name);
 }

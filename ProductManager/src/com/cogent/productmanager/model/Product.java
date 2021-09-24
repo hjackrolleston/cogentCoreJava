@@ -9,4 +9,10 @@ public /*final */class Product {
 	private String productId,productName,productPrice,batchNo;
 	private long productQuantity;
 	private Date createdDate, expiryDate;
+	
+	public void printDetails() {
+		System.out.println(productId+" "+productName+" "+productPrice+" "
+				+batchNo+" "+productQuantity+" "+createdDate+" "+expiryDate
+				);
+	}
 }
