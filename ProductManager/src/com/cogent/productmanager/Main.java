@@ -32,7 +32,7 @@ public class Main {
 		
 		System.out.println(productService.deleteProductById("kb999s"));
 		
-		productService.showNameList();
+		productService.showNameList(); System.out.println("Fixing this...");
 		
 		
 		// Updating the record for an employee who got a raise
