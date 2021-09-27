@@ -16,7 +16,7 @@ public class Main {
 		Product pro3=new Product("kb999","Kaboom","$19.95","18",3,null,null);
 		Product pro4=new Product("mp861","MightyPutty","$19.96","13",3,null,null);
 		
-		
+		// This comment is to test if everything worked github-wise../
 		String re1 = productService.addProduct(pro1);
 		String re2 = productService.addProduct(pro2);
 		String re3 = productService.addProduct(pro3);
