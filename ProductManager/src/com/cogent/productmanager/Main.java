@@ -10,7 +10,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ProductServiceImpl productService = new ProductServiceImpl();
+		ProductServiceImpl productService = ProductServiceImpl.getInstance();
 		Product pro1=new Product("ox444","OxiClean","$19.99","25",3,null,null);
 		Product pro2=new Product("or843","OrangeGlo","$19.98","24",3,null,null);
 		Product pro3=new Product("kb999","Kaboom","$19.95","18",3,null,null);

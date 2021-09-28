@@ -5,10 +5,12 @@ import com.cogent.employeemanagementsystem.exception.IdNotFoundException;
 import com.cogent.employeemanagementsystem.model.Employee;
 import com.cogent.employeemanagementsystem.repository.EmployeeRepository;
 import com.cogent.employeemanagementsystem.repository.EmployeeRepositoryImpl;
+//import com.cogent.employeemanagementsystem.repository.EmployeeService;
+//import com.cogent.employeemanagementsystem.repository.EmployeeServiceImpl;
 
 public class EmployeeServiceImpl implements EmployeeService {
 	
-	
+	private static EmployeeServiceImpl employeeService;
 	EmployeeRepository employeeRepository = EmployeeRepositoryImpl.getInstance();
 	// are we consuming the repo?
 	
@@ -18,6 +20,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 				System.out.println(employee2.getFirstName()+" "+employee2.getLastName());
 			}else {System.out.println("[empty]");}
 		}
+	}
+	private EmployeeServiceImpl() {}
+	
+	public static EmployeeService/*Impl*/ getInstance() {
+		if (employeeService == null) {
+			employeeService = new EmployeeServiceImpl();
+			return employeeService;
+		}
+		return employeeService;
 	}
 	
 	// private Employee employees[] = new Employee[10];

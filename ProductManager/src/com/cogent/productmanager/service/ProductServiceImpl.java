@@ -10,6 +10,14 @@ import com.cogent.productmanager.repository.ProductRepositoryImpl;
 public class ProductServiceImpl implements ProductService {
 	ProductRepository productRepository = ProductRepositoryImpl.getInstance();
 	
+	private static ProductServiceImpl productService;
+	private ProductServiceImpl() {}
+	public static ProductServiceImpl getInstance() {
+		if (productService==null) {productService=new ProductServiceImpl();
+			return productService;
+		}return productService;
+	}
+	
 	@Override
 	public String addProduct(Product product) {
 		return productRepository.addProduct(product);
