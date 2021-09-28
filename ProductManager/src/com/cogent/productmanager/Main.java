@@ -16,7 +16,6 @@ public class Main {
 		Product pro3=new Product("kb999","Kaboom","$19.95","18",3,null,null);
 		Product pro4=new Product("mp861","MightyPutty","$19.96","13",3,null,null);
 		
-		// This comment is to test if everything worked github-wise../
 		String re1 = productService.addProduct(pro1);
 		String re2 = productService.addProduct(pro2);
 		String re3 = productService.addProduct(pro3);
@@ -30,7 +29,7 @@ public class Main {
 		Product[] products = productService.getProducts(); productService.showNameList();
 		System.out.println("===================\n\n");
 		
-		System.out.println(productService.deleteProductById("kb999s"));
+		try{System.out.println(productService.deleteProductById("kb999s"));}catch(Exception e) {e.printStackTrace();}
 		
 		productService.showNameList(); System.out.println("Fixing this...");
 		
@@ -38,13 +37,18 @@ public class Main {
 		// Updating the record for an employee who got a raise
 		productService.getProducts()[3].printDetails();
 		pro4 = new Product("kb999","HerculesHook","$19.99","10",4,null,null);
-		productService.updateProduct("mp861",pro4);
-		productService.getProducts()[3].printDetails();
+		
+		try {productService.updateProduct("mp861",pro4);
+			productService.getProducts()[3].printDetails();
+		} catch(Exception e) {e.printStackTrace();}
+		
+	
 		
 		Scanner sc = new Scanner(System.in);System.out.println("Enter a product's name...");
 		String fN = sc.next();
-		Product searched=productService.getProductByName(fN);
-		if(searched!=null) {searched.printDetails();}
+		try{Product searched=productService.getProductByName(fN);
+			if(searched!=null) {searched.printDetails();}
+		}catch(Exception e) {e.printStackTrace();}
 	}
 
 }

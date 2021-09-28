@@ -1,11 +1,90 @@
 package com.cogent.employeemanagementsystem;
+import java.lang.Exception;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import com.cogent.employeemanagementsystem.model.Employee;
 import java.util.Scanner;
 import com.cogent.employeemanagementsystem.service.EmployeeServiceImpl;
+import java.io.FileOutputStream;
+import java.io.IOException;
 public class Main {
+	
 
+	
+	// Better old code
+	/*public static int division(int a,int b) {
+		int c=0;
+		try {
+			c=a/b;return c;
+		} catch (NullPointerException e) {/*return -1;*///}
+		// create an Exception object
+		/*finally{System.out.println("After catch block.");}return -1;
+		
+	}*/
+	
+	//more good old code: 
+	
 	public static void main(String[] args) {
 		
+		Employee emmp = new Employee("ab001", "Abhi", "Chivate", 123.00f);
+		try {
+			emmp.setEmpSalary(-5000f);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		/* try {
+			FileOutputStream fOS = new FileOutputStream("abc.txt");
+			fOS.write("abc".getBytes());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		/*System.out.println("All is well.");
+		try {String s=null;System.out.println(s.concat("Abhi"));}*/
+		// Each Exception type is a subclass of supertype
+		// Exception, meaning more specific exception types
+		// should be called BEFORE the general Exception
+		// supertype is called
+		/*catch(ArithmeticException a) {}
+		catch(NullPointerException n) {}
+		catch(RuntimeException r) {}
+		catch (Exception e) {System.out.println("Exception caught.");
+			System.out.println(e.getClass().getName());
+		}
+		
+		catch (Throwable t)  {}*/ // Throwable being the supertype of all Exceptions
+		
+		// That's a negative - Objects cannot be
+		// caught/thrown, as they're not Throwable;
+		// Object is supertype, not subtype, of Throwable
+		//catch (Object o) {}
+		
+		/*int result=division(10,5);
+		System.out.println(result); */
+		
+		// Worse older code
+		/* Scanner sc = new Scanner(System.in);
+		System.out.println("Enter data (should be integers): ");
+		//int a=sc.nextInt();int b=sc.nextInt();
+		int a=1; int b=1; */
+		/* System.out.println(a);System.out.println(b);*/  //int c=1;
+		
+		/*try {
+			a=sc.nextInt();b=sc.nextInt();System.out.println(a);
+			System.out.println(b); c=a/b;
+		} catch (Exception e) {System.out.println("Code stopped "
+				+ "on exception; result of operated-upon inputs "
+				+"could not be resolved to type int.");}
+		finally {System.out.println("Inside the finally block. ");}
+		
+		
+		System.out.println("Division is " +c); */
 		// switch case to handle all options:
 		/*
 		 * 1) add
@@ -16,7 +95,7 @@ public class Main {
 		 * 6) exits
 		 * */
 		
-		EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
+		/* EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
 		Employee emp1=new Employee("ab001","Abhi","Chivate",123.00f);
 		Employee emp2=new Employee("ja454","Jason","Richards",123.00f);
 		Employee emp3=new Employee("re994","Reggie","Knox",122.00f);
@@ -38,11 +117,11 @@ public class Main {
 		
 		System.out.println(employeeService.deleteEmployeeById("am933"));
 		
-		employeeService.showNameList();
+		employeeService.showNameList(); */
 		
 		
 		// Updating the record for an employee who got a raise
-		employeeService.getEmployees()[3].printDetails();
+		/* employeeService.getEmployees()[3].printDetails();
 		emp4 = new Employee("ja522","Janice","Bronson",150.00f);
 		employeeService.updateEmployees("ja522",emp4);
 		employeeService.getEmployees()[3].printDetails();
@@ -50,7 +129,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);System.out.println("Enter an employee's first name...");
 		String fN = sc.next();System.out.println("Last name...");String lN=sc.next();
 		Employee searched=employeeService.getEmployeeByName(fN,lN);
-		if(searched!=null) {searched.printDetails();}
+		if(searched!=null) {searched.printDetails();} */
 	}
 
 }

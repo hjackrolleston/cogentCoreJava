@@ -1,5 +1,9 @@
 package com.cogent.employeemanagementsystem.repository;
 
+import java.io.IOException;
+
+import com.cogent.employeemanagementsystem.exception.IdNotFoundException;
+import com.cogent.employeemanagementsystem.exception.InvalidNameException;
 import com.cogent.employeemanagementsystem.model.Employee;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
@@ -29,16 +33,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 				}
 			}
 		}return "Employee not found with this id.";
-		
-	// TODO Auto-generated method stub
 	//return null;
 	}
 	@Override
 	public void deleteAllEmployees() {
 		this.employees = new Employee[10];
 		System.out.println("Record fully emptied.");
-		// TODO Auto-generated method stub
-		
 	}
 	
 	static int counter = 0;
@@ -55,13 +55,16 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		return "success";*/
 	}
 
-	public Employee getEmployeeById(String id) {
+	public Employee getEmployeeById(String id) throws IdNotFoundException, IOException {
+		// to throw caught exception to the caller
 		for (Employee employee : employees) {
 			if (employee != null && id.equals(employee.getEmployeeId())) {
 				return employee;
 			}
 		}
-		return null;
+		//return null;
+		throw new IdNotFoundException("Id not found.");
+		// idnotfound exception(?) - user-defined
 	}
 
 	public Employee[] getEmployees() {
@@ -72,7 +75,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 	// 3) if we can't find it, return notfound
 
 	@Override
-	public String deleteEmployeeById(String id) {
+	public String deleteEmployeeById(String id) throws IdNotFoundException, IOException {
 		Employee employee = this.getEmployeeById(id);
 		if (employee!=null) {
 			int index=this.getIndex(employee);
@@ -86,8 +89,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 				////
 				
 				return"Deleted.";
-			} else {return "not found";}
-		} return "not found";
+			} else {
+				//return "not found";
+				throw new IdNotFoundException("ID not found");
+			}
+		}
+		throw new IdNotFoundException("ID not found.");
+		//return "not found";
 	}
 	
 	@Override
@@ -98,8 +106,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 					return e;
 				}
 			}
-		}System.out.println("Employee with this name does not exist.");
-		return null;
+		}//System.out.println("Employee with this name does not exist.");
+		throw new InvalidNameException("Employee with this name does not exist.");
+		//return null;
 	}
 	
 	/** Method added: 2021 Sept 23 Thurs (Day 4)

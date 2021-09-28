@@ -1,4 +1,8 @@
 package com.cogent.productmanager.service;
+import java.io.IOException;
+
+import com.cogent.productmanager.exception.IdNotFoundException;
+import com.cogent.productmanager.exception.InvalidNameException;
 import com.cogent.productmanager.model.Product;
 import com.cogent.productmanager.repository.ProductRepository;
 import com.cogent.productmanager.repository.ProductRepositoryImpl;
@@ -6,14 +10,13 @@ import com.cogent.productmanager.repository.ProductRepositoryImpl;
 public class ProductServiceImpl implements ProductService {
 	ProductRepository productRepository = ProductRepositoryImpl.getInstance();
 	
-	// Done.
 	@Override
 	public String addProduct(Product product) {
 		return productRepository.addProduct(product);
 		//return null;
 	}
 	
-	public Product getProductByName(String name) {
+	public Product getProductByName(String name) throws IOException, InvalidNameException {
 		return productRepository.getProductByName(name);
 	}
 	
@@ -25,28 +28,24 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 	
-	// Done.
 	@Override
-	public String deleteProductById(String id) {
+	public String deleteProductById(String id) throws IOException, IdNotFoundException {
 		return productRepository.deleteProductById(id);
 		//return null;
 	}
 	
-	// Done.
 	@Override
 	public void deleteAllProducts() { productRepository.deleteAllProducts(); }
 	
-	// Done.
 	@Override
-	public Product getProductById(String id) { return productRepository.getProductById(id); }
+	public Product getProductById(String id) throws IOException, IdNotFoundException {
+		return productRepository.getProductById(id); }
 	
-	// Done.
 	@Override
 	public Product[] getProducts() { return productRepository.getProducts(); }
 
-	// Done.
 	@Override
-	public String updateProduct(String id, Product product) {
+	public String updateProduct(String id, Product product) throws IOException, IdNotFoundException {
 		return productRepository.updateProduct(id,product);
 	}
 

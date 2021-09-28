@@ -1,4 +1,8 @@
 package com.cogent.productmanager.repository;
+import java.io.IOException;
+
+import com.cogent.productmanager.exception.IdNotFoundException;
+import com.cogent.productmanager.exception.InvalidNameException;
 import com.cogent.productmanager.model.Product;
 
 // DO NOT import @Data or @AllArgsConstructor into here
@@ -15,7 +19,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 		} return productRepository;
 	}
 	
-	// Done.
 	@Override
 	public String addProduct(Product product) {
 		for (int ct=0;ct<products.length;ct++) {
@@ -24,9 +27,8 @@ public class ProductRepositoryImpl implements ProductRepository {
 		//return null;
 	}
 	
-	// Done.
 	@Override
-	public String updateProduct(String productId, Product product) {
+	public String updateProduct(String productId, Product product) throws IOException, IdNotFoundException {
 		for (int i=0;i<products.length;i++){
 			if (products[i]!=null) {
 				if ( productId.equals(products[i].getProductId()) ){
@@ -40,30 +42,32 @@ public class ProductRepositoryImpl implements ProductRepository {
 							+products[i].getProductQuantity();
 				}
 			}
-		}return "Product not found with this id.";
+		} throw new IdNotFoundException("Product not found with this ID.");
+		//return "Product not found with this ID.";
 		//return null;
 	}
 	
-	// Done.
 	@Override
-	public Product getProductById(String id) {
+	public Product getProductById(String id) throws IOException, IdNotFoundException {
 		for (Product product : products) {
 			if (product != null && id.equals(product.getProductId())) {
 				return product;
 			}
-		} return null;
+		}
+		//return null;
+		throw new IdNotFoundException("Product not found with this ID.");
 	}
 	
 	@Override
-	public Product getProductByName(String name) {
+	public Product getProductByName(String name) throws InvalidNameException, IOException {
 		for (Product product : products) {
 			if (product != null && name.equals(product.getProductName())) {
 				return product;
 			}
-		} return null;
+		} throw new InvalidNameException("Product of this name does not exist. ");
+		//return null;
 	}
 	
-	// Done.
 	@Override
 	public Product[] getProducts() {
 		return products;
@@ -71,7 +75,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 	
 	// Done.
 	@Override
-	public String deleteProductById(String id) {
+	public String deleteProductById(String id) throws IOException, IdNotFoundException {
 		Product product = this.getProductById(id);
 		if (product!=null) {
 			int index=this.getIndex(product);
@@ -85,8 +89,12 @@ public class ProductRepositoryImpl implements ProductRepository {
 				////
 				
 				return"Deleted.";
-			} else {return "not found";}
-		} return "not found";
+			} else {
+				throw new IdNotFoundException("Product of this ID not found.");
+				//return "not found";
+			}
+		} throw new IdNotFoundException("Product of this ID not found.");
+		//return "not found";
 		
 		//return null;
 	}
@@ -110,7 +118,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 		} return productsTemp;
 	}
 	
-	// Done.
 	@Override
 	public void deleteAllProducts() {
 		this.products = new Product[10];
