@@ -1,13 +1,34 @@
 package com.cogent.employeemanagementsystem.model;
 import lombok.Data;
 
+import java.util.Objects;
+
 import com.cogent.employeemanagementsystem.exception.InvalidSalaryException;
 
 import lombok.AllArgsConstructor;
 
 //@Data
 //@AllArgsConstructor
-public /*final*/ class Employee {
+public class Employee {
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, empSalary, employeeId, firstName, lastName);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) // Reflexive condition
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		return Objects.equals(address, other.address)
+				&& Float.floatToIntBits(empSalary) == Float.floatToIntBits(other.empSalary)
+				&& Objects.equals(employeeId, other.employeeId) && Objects.equals(firstName, other.firstName)
+				&& Objects.equals(lastName, other.lastName);
+	}
 	private String employeeId, firstName, lastName, address;
 	// private String departmentId;
 	private float empSalary;

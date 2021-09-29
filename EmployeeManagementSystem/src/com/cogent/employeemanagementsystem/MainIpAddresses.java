@@ -1,6 +1,6 @@
 package com.cogent.employeemanagementsystem;
 
-public class Main2 {
+public class MainIpAddresses {
 	public static void main(String[] args) {
 		
 		// ip : 192.168.1.1

@@ -1,9 +1,14 @@
 package com.cogent.employeemanagementsystem;
 import java.lang.Exception;
+import com.cogent.employeemanagementsystem.service.EmployeeService;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
+import java.util.Set;
+import com.cogent.employeemanagementsystem.exception.InvalidSalaryException;
 import com.cogent.employeemanagementsystem.model.Employee;
+import com.cogent.employeemanagementsystem.repository.EmployeeRepository;
+
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 import com.cogent.employeemanagementsystem.service.EmployeeServiceImpl;
 import java.io.FileOutputStream;
@@ -27,13 +32,30 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		Employee emmp = new Employee("ab001", "Abhi", "Chivate", 123.00f);
+		//Employee emmp = new Employee("ab001", "Abhi", "Chivate", 123.00f);
+		EmployeeService serv = EmployeeServiceImpl.getInstance();
+		Employee emp1=null;
 		try {
-			emmp.setEmpSalary(-5000f);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			emp1 = new Employee("ab001", "Abhi", "Chivate", 123.00f);
+			System.out.println(serv.addEmployee(emp1));
+		}catch(InvalidSalaryException e) {e.printStackTrace();}
+		//System.out.println(emp1.hashCode());
 		
+		Employee emp2=null;
+		try {emp2=new Employee("ad001","Advik","Chivate",10000.0f);}
+		catch(InvalidSalaryException e){e.printStackTrace();}
+		
+		Employee emp3=null;
+		try {emp3=new Employee("ab002","Abhi","Chivate",1000000.0f);}
+		catch(InvalidSalaryException e){e.printStackTrace();}
+		
+		System.out.println(Integer.toHexString(emp1.hashCode()));
+		System.out.println(Integer.toHexString(emp2.hashCode()));
+		System.out.println(Integer.toHexString(emp3.hashCode()));
+		
+		Set<Employee> employees=new LinkedHashSet<>();
+		employees.add(emp1);employees.add(emp2);employees.add(emp3);
+		for(Employee emmp:employees) {System.out.println(emmp);}
 		/* try {
 			FileOutputStream fOS = new FileOutputStream("abc.txt");
 			fOS.write("abc".getBytes());

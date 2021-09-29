@@ -1,6 +1,7 @@
 package com.cogent.employeemanagementsystem.repository;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.cogent.employeemanagementsystem.exception.IdNotFoundException;
 import com.cogent.employeemanagementsystem.exception.InvalidNameException;
@@ -8,7 +9,8 @@ import com.cogent.employeemanagementsystem.model.Employee;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 	private Employee employees[] = new Employee[10];
-
+	//private ArrayList<Employee> employees = new ArrayList<>();
+	
 	private static EmployeeRepositoryImpl employeeRepository;
 
 	private EmployeeRepositoryImpl() {}
@@ -41,6 +43,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		System.out.println("Record fully emptied.");
 	}
 	
+	@Override
+	public boolean isEmployeeExists(String id) {
+		for (Employee emmp: employees) {
+			if(id.equals(emmp.getEmployeeId())) {return true;}
+		}return false;
+	}
+	
 	static int counter = 0;
 
 	public String addEmployee(Employee employee) {
@@ -67,8 +76,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		// idnotfound exception(?) - user-defined
 	}
 
-	public Employee[] getEmployees() {
-		return employees;
+	@Override
+	public List<Employee> getEmployees() {
+		//return employees;
+		return employeeRepository.getEmployees();
+		
+		//Employee employee[] = new Employee[employees.size()];
+		//return employees.toArray(employee);
 	}
 	// 1) check if id exists or not
 	// 2) if it exists, then set null to location (can't actually delete it)
