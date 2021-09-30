@@ -1,5 +1,6 @@
 package com.cogent.employeemanagementsystem.model;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.Objects;
 
@@ -9,12 +10,15 @@ import lombok.AllArgsConstructor;
 
 //@Data
 //@AllArgsConstructor
-public class Employee {
+@ToString
+public class Employee /*implements Comparable<Employee>*/ {
 	@Override
 	public int hashCode() {
 		return Objects.hash(address, empSalary, employeeId, firstName, lastName);
 	}
-
+	
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) // Reflexive condition
@@ -88,5 +92,10 @@ public class Employee {
 		if (empSalary>0) {this.empSalary = empSalary;}
 		else {throw new InvalidSalaryException("Salaries can't be negative.");}
 	}
+
+	/*@Override
+	public int compareTo(Employee o) {
+		return this.employeeId.compareTo(o.employeeId);
+	}*/
 
 }

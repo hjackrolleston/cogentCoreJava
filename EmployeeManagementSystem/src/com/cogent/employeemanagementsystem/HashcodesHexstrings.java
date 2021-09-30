@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.cogent.employeemanagementsystem.model.Employee;
 
-public class Main5 {
+public class HashcodesHexstrings {
 
 	public static void main(String[] args) {
 		Employee emp1=new Employee();
