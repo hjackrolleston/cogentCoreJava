@@ -13,9 +13,38 @@ import com.cogent.employeemanagementsystem.model.Employee;
 
 public class EmployeeRepositoryALImpl implements EmployeeRepository {
 	
+	public static void main(String[]args) {
+		Thread thread=new Thread(()->{
+			EmployeeRepository employeeRepository=
+					EmployeeRepositoryALImpl.getInstance();
+			System.out.println(employeeRepository.hashCode());
+		});
+		thread.start();
+		Thread thread2=new Thread(()->{
+			EmployeeRepository employeeRepository=
+					EmployeeRepositoryALImpl.getInstance();
+			System.out.println(employeeRepository.hashCode());
+		});
+		thread2.start();
+	}
+	
 	private static EmployeeRepositoryALImpl instance = new EmployeeRepositoryALImpl();
 	private EmployeeRepositoryALImpl() {}
-	public static EmployeeRepositoryALImpl getInstance() {return instance;}
+	
+	//public static EmployeeRepositoryALImpl getInstance() {return instance;}
+	
+	/*Port this block over, as well*/
+	private static EmployeeRepositoryALImpl employeeRepository;
+	public synchronized static EmployeeRepository getInstance() {
+		if (employeeRepository==null) {
+			synchronized(EmployeeRepositoryALImpl.class) {
+				if (employeeRepository == null) {
+					employeeRepository = new EmployeeRepositoryALImpl();
+					return employeeRepository;
+				}		
+			}
+		}return employeeRepository;
+	}
 	
 	// Can we get a Singleton DP? (Private noargs constructor)
 	//private List<Employee> employees = new ArrayList<Employee>();
